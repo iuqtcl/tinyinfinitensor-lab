@@ -25,6 +25,8 @@ namespace infini
         size_t offsetD = allocator.alloc(d->getBytes());
         // expected to be a->d->c
         EXPECT_EQ(offsetB, offsetD);
+        std::cout << "offsetA: " << offsetA << ", offsetB: " << offsetB
+          << ", offsetC: " << offsetC << ", offsetD: " << offsetD << std::endl;
         ASSERT_FALSE(offsetA == 0 && offsetB == 0 && offsetC == 0 && offsetD == 0);
     }
 

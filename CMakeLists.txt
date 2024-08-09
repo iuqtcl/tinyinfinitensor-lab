@@ -31,6 +31,10 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_EXTENSIONS OFF) # -std=gnu++11 when on, -std=c++11 when off
 add_compile_options(-Wno-error=unused-variable)
 
+set(Python_EXECUTABLE "/usr/bin/python3.11")
+set(Python_INCLUDE_DIRS "/usr/include/python3.11")
+set(Python_LIBRARIES "/usr/lib/python3.11/config-3.11-x86_64-linux-gnu/libpython3.11.so")
+
 find_package(
   Python
   COMPONENTS Interpreter Development
@@ -81,6 +85,7 @@ function(build_test files)
     get_filename_component(testname ${testsourcefile} NAME_WE)
     add_executable(${testname} ${testsourcefile})
     target_link_libraries(${testname} InfiniTensor GTest::gtest_main)
+    set_target_properties(${testname} PROPERTIES COMPILE_FLAGS "-O0")
     add_test(NAME ${testname} COMMAND ${testname})
   endforeach(testsourcefile ${TEST_SOURCES})
 endfunction()
